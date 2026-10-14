@@ -31,12 +31,6 @@ body {
 ::-webkit-scrollbar-track { background: #07080f; }
 ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 2px; }
 
-/* Dot grid */
-.dot-grid {
-  background-image: radial-gradient(rgba(139,92,246,0.06) 1px, transparent 1px);
-  background-size: 30px 30px;
-}
-
 /* Glass */
 .glass {
   background: rgba(255,255,255,0.03);

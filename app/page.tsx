@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import {
   ArrowRight, ArrowUpRight, Beaker,
@@ -9,6 +12,7 @@ import FloatingDots from "@/components/bits/FloatingDots";
 import BlurText from "@/components/bits/BlurText";
 import TypewriterText from "@/components/bits/TypewriterText";
 import GlowCard from "@/components/bits/GlowCard";
+import ContactModal from "@/components/ContactModal";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -129,12 +133,16 @@ function StatusBadge({ status }: { status: "live" | "soon" | "wip" }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
-    <main className="relative min-h-screen dot-grid overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
 
       {/* ── BACKGROUND LAYERS ── */}
-      <AuroraBackground />
-      <FloatingDots />
+      {/* <AuroraBackground /> */}
+      {/* <FloatingDots /> */}
 
       {/* ── CONTENT ── */}
       <div className="relative z-10">
@@ -147,7 +155,7 @@ export default function HomePage() {
             <div className="flex items-center gap-3">
               {/* white bg behind dark logo */}
               <div className="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/20">
-                <Image src="/Varlabs.png" alt="VarLab" width={24} height={24} className="rounded-lg" />
+                <Image src="/Varlabs.png" alt="VarLab" width={24} height={24} className="rounded-lg" priority loading="eager" />
               </div>
               <span className="font-bold text-white text-lg tracking-tight">VarLab</span>
               <span className="text-[10px] font-bold bg-violet-500/15 border border-violet-500/25 text-violet-300 px-2 py-0.5 rounded-full">
@@ -187,7 +195,7 @@ export default function HomePage() {
                   <div className="relative">
                     <div className="absolute -inset-4 bg-violet-500/20 rounded-[32px] blur-2xl" />
                     <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-5 shadow-2xl shadow-violet-500/20">
-                      <Image src="/Varlabs.png" alt="VarLab" width={96} height={96} className="rounded-2xl" />
+                      <Image src="/Varlabs.png" alt="VarLab" width={96} height={96} className="rounded-2xl" priority loading="eager" />
                     </div>
                   </div>
                 </div>
@@ -257,6 +265,8 @@ export default function HomePage() {
                         width={280}
                         height={280}
                         className="rounded-2xl"
+                        priority
+                        loading="eager"
                       />
                     </div>
                   </div>
@@ -448,11 +458,12 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 mt-8">
-                <a href="mailto:support.varstory@gmail.com"
+                <button
+                  onClick={() => setContactOpen(true)}
                   className="flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white glass hover:bg-white/10 px-5 py-2.5 rounded-full transition-all">
                   <Mail className="w-4 h-4" />
                   Get in touch
-                </a>
+                </button>
                 <a href="https://www.varverse.biz.id" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm font-semibold text-violet-300 hover:text-white bg-violet-500/10 hover:bg-violet-500/20 border border-violet-500/20 hover:border-violet-400/40 px-5 py-2.5 rounded-full transition-all">
                   Visit Varverse
@@ -545,7 +556,7 @@ export default function HomePage() {
             <div className="flex items-center gap-6 text-xs text-white/25 font-mono">
               <a href="#products"   className="hover:text-violet-400 transition-colors">Products</a>
               <a href="https://www.varverse.biz.id" target="_blank" rel="noopener noreferrer" className="hover:text-violet-400 transition-colors">Varverse</a>
-              <a href="mailto:support.varstory@gmail.com" className="hover:text-violet-400 transition-colors">Contact</a>
+              <button onClick={() => setContactOpen(true)} className="hover:text-violet-400 transition-colors">Contact</button>
             </div>
             <p className="text-xs text-white/15 font-mono">© {new Date().getFullYear()} Varverse · All rights reserved</p>
           </div>
